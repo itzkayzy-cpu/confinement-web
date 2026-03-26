@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Confinement | Premium Sports Consulting</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+    	.legal-footer {
+    	margin-top: 60px;
+    	padding-top: 20px;
+    	border-top: 1px solid rgba(255, 255, 255, 0.05);
+    	text-align: left;
+		}
+		
+		
+		.legal-text {
+    		font-size: 0.65rem;
+    		color: #475569;
+    		line-height: 1.5;
+    		margin-bottom: 20px;
+		}
+		
+		.legal-links {
+    		display: flex;
+    		gap: 15px;
+    		justify-content: center;
+		}
+		
+		.legal-links a {
+    		font-size: 0.7rem;
+    		color: var(--text-dim);
+    		text-decoration: none;
+    		font-weight: 600;
+		}
+		
+		.legal-links a:hover { color: #fff; }
+		
+        :root {
+            --bg-dark: #05070a;
+            --card-bg: #0f172a;
+            --accent: #007aff;
+            --text-main: #ffffff;
+            --text-dim: #94a3b8;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container { width: 100%; max-width: 480px; padding: 40px 24px; text-align: center; }
+
+        .hero-section { margin-bottom: 48px; }
+
+        .brand-tag {
+            display: inline-block;
+            background: rgba(0, 122, 255, 0.15);
+            color: var(--accent);
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(0, 122, 255, 0.3);
+        }
+
+        .main-title {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -0.05em;
+            margin: 0 0 16px 0;
+            background: linear-gradient(180deg, #FFFFFF 0%, #94A3B8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sub-title { font-size: 1.05rem; color: var(--text-dim); max-width: 340px; margin: 0 auto; line-height: 1.6; }
+
+        .card {
+            position: relative;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 40px 32px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .price-tag { font-size: 2.2rem; font-weight: 700; margin-bottom: 24px; }
+        .price-tag span { font-size: 1rem; color: var(--text-dim); font-weight: 400; }
+
+        .input-group { text-align: left; margin-bottom: 24px; }
+
+        .id-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; }
+
+        .how-to-link {
+            font-size: 0.7rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            border-bottom: 1px dashed var(--accent);
+        }
+
+        .instruction-box {
+            background: rgba(0, 122, 255, 0.05);
+            border: 1px solid rgba(0, 122, 255, 0.2);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .instruction-box p { font-size: 0.85rem; color: #cbd5e1; margin: 0 0 8px 0; line-height: 1.4; text-align: left; }
+
+        .id-input-wrapper { position: relative; display: flex; align-items: center; }
+
+        .id-prefix {
+            position: absolute;
+            left: 16px;
+            color: #475569;
+            font-weight: 700;
+            font-size: 0.9rem;
+            pointer-events: none;
+        }
+
+        input {
+            width: 100%;
+            background: rgba(0,0,0,0.2);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 14px 16px 14px 42px;
+            color: white;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s ease;
+            appearance: none; /* Removes default styling */
+        }
+
+        /* REMOVES THE UP/DOWN ARROWS (Spinners) */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield; /* Firefox support */
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.15);
+        }
+
+        button {
+            width: 100%;
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0, 122, 255, 0.3); }
+
+        .footer-note { font-size: 0.75rem; color: #475569; margin-top: 32px; line-height: 1.4; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="hero-section">
+        <div class="brand-tag">Premium Access</div>
+        <h1 class="main-title">The<br>Confinement</h1>
+        <p class="sub-title">Quantitative sports consulting for the disciplined edge.</p>
+    </div>
+    
+    <div class="card">
+        <div class="price-tag">$25<span>/week</span></div>
+
+        <div class="input-group">
+            <div class="id-header">
+                <label>Telegram User ID</label>
+                <a class="how-to-link" onclick="toggleInfo()">What is this?</a>
+            </div>
+            
+            <div id="info-box" class="instruction-box">
+                <p>1. Search for <a href="https://t.me/userinfobot" target="_blank" style="color:#fff; text-decoration:underline;">@userinfobot</a>.</p>
+                <p>2. Message it to get your <b>numerical ID</b>.</p>
+                <p>3. Paste that number below.</p>
+            </div>
+
+            <div class="id-input-wrapper">
+                <span class="id-prefix">ID</span>
+                <input type="number" id="tg-id" placeholder="000000000" inputmode="numeric">
+            </div>
+        </div>
+
+        <button id="checkout-button">Get Instant Access</button>
+        <p class="footer-note">Securely processed by Stripe.</p>
+    </div>
+    <div class="legal-footer">
+    <p class="legal-text">
+        <b>Disclaimer:</b> The Confinement provides sports analysis and consulting for educational and entertainment purposes only. We do not provide gambling or betting services. Past performance does not guarantee future results. Please bet responsibly. If you or someone you know has a gambling problem, please seek help. 
+    </p>
+    
+    <div class="legal-links">
+        <a href="#" onclick="alert('Subscription is billed weekly. Cancel anytime via Stripe portal or by messaging @OVERALLEXPERT. No refunds on active weeks.')">Refund Policy</a>
+        <a href="#" onclick="alert('We only collect your Telegram ID to manage group access. We never share your data with third parties.')">Privacy</a>
+        <a href="#" onclick="alert('Must be 18+ to join. We are not responsible for any financial losses incurred.')">Terms</a>
+    </div>
+</div>
+</div>
+
+<script>
+    // Replace with your Stripe Publishable Key
+    const stripe = Stripe('your_publishable_key_here'); 
+    const button = document.getElementById('checkout-button');
+    const idInput = document.getElementById('tg-id');
+
+    function toggleInfo() {
+        const box = document.getElementById('info-box');
+        box.style.display = (box.style.display === 'block') ? 'none' : 'block';
+    }
+
+    // STRICT NUMBERS ONLY: Prevents typing "e", ".", "-", or "+"
+    idInput.addEventListener('keydown', (e) => {
+        if (['e', 'E', '.', '-', '+'].includes(e.key)) {
+            e.preventDefault();
+        }
+    });
+
+    button.addEventListener('click', async () => {
+        const tgId = idInput.value.trim();
+        if(!tgId || tgId.length < 5) return alert("Please enter a valid numerical ID.");
+
+        button.disabled = true;
+        button.innerText = "Connecting...";
+
+        try {
+            const response = await fetch('/create-checkout-session', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ telegram_id: tgId })
+            });
+            const session = await response.json();
+            await stripe.redirectToCheckout({ sessionId: session.id });
+        } catch (err) {
+            button.disabled = false;
+            button.innerText = "Get Instant Access";
+        }
+    });
+</script>
+
+</body>
+</html>
